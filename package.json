@@ -1,0 +1,12 @@
+{
+  "name": "loewe-additivity-calculator",
+  "version": "1.0.0",
+  "description": "Loewe additivity and isobologram analysis calculator package",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
