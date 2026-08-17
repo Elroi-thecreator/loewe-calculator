@@ -4,137 +4,197 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loewe Additivity Calculator | Holy Cross College</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body { background-color: #f8fafc; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
-  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="p-4 md:p-10 text-slate-800 flex flex-col min-h-screen">
-  <div class="max-w-5xl mx-auto space-y-6 flex-grow w-full">
-    <!-- Header with Institution & Author Details -->
-    <header class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+  <!-- Background Glow Accents -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-40 left-1/4 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 py-8 md:py-12 flex-grow w-full space-y-8">
+    
+    <!-- Hero / Header Card -->
+    <header class="bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-800/80">
         <div>
-          <span class="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-200 rounded-full mb-2">
-            Academic Research Tool
-          </span>
-          <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Loewe Additivity Calculator</h1>
-          <p class="text-slate-500 text-sm mt-1">Pharmacodynamic synergy, additivity, and isobologram analyzer</p>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-3">
+            <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+            Pharmacodynamics &amp; Synergy Suite
+          </div>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Loewe Additivity Calculator</h1>
+          <p class="text-slate-400 text-sm md:text-base mt-1.5">Interactive dose-additivity modeling and real-time isobolographic analysis</p>
         </div>
-        <div class="flex flex-wrap gap-2">
-          <button onclick="loadPreset('synergy')" class="px-3 py-1.5 text-xs font-semibold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg border border-emerald-200 transition">Preset: Synergy</button>
-          <button onclick="loadPreset('additive')" class="px-3 py-1.5 text-xs font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg border border-blue-200 transition">Preset: Additive</button>
-          <button onclick="loadPreset('antagonism')" class="px-3 py-1.5 text-xs font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-lg border border-rose-200 transition">Preset: Antagonism</button>
+
+        <!-- Action Presets -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="loadPreset('synergy')" class="px-4 py-2 text-xs font-bold rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500 hover:text-slate-950 transition-all duration-200 shadow-sm">
+            Synergy Preset
+          </button>
+          <button onclick="loadPreset('additive')" class="px-4 py-2 text-xs font-bold rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500 hover:text-white transition-all duration-200 shadow-sm">
+            Additive Preset
+          </button>
+          <button onclick="loadPreset('antagonism')" class="px-4 py-2 text-xs font-bold rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20 hover:bg-rose-500 hover:text-white transition-all duration-200 shadow-sm">
+            Antagonism Preset
+          </button>
         </div>
       </div>
-      
-      <!-- Metadata Tag Bar -->
-      <div class="pt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-600">
-        <div><span class="font-bold text-slate-800">Developers:</span> Dr. Pon Nivedha Rajamanickam &amp; Dr. Jothi Nedunchezhian</div>
-        <div><span class="font-bold text-slate-800">Department:</span> Biotechnology and Bioinformatics</div>
-        <div><span class="font-bold text-slate-800">Institution:</span> Holy Cross College (Autonomous), Trichirapalli</div>
+
+      <!-- Institutional Metadata -->
+      <div class="pt-5 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-3 rounded-2xl bg-slate-950/50 border border-slate-800/60">
+          <span class="block text-slate-500 font-medium">Principal Developers</span>
+          <span class="font-semibold text-slate-200 text-sm mt-0.5 block">Dr. Pon Nivedha Rajamanickam &amp; Dr. Jothi Nedunchezhian</span>
+        </div>
+        <div class="p-3 rounded-2xl bg-slate-950/50 border border-slate-800/60">
+          <span class="block text-slate-500 font-medium">Academic Department</span>
+          <span class="font-semibold text-slate-200 text-sm mt-0.5 block">Biotechnology &amp; Bioinformatics</span>
+        </div>
+        <div class="p-3 rounded-2xl bg-slate-950/50 border border-slate-800/60">
+          <span class="block text-slate-500 font-medium">Institution</span>
+          <span class="font-semibold text-slate-200 text-sm mt-0.5 block">Holy Cross College (Autonomous), Trichy</span>
+        </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      <!-- Input Controls Panel -->
-      <div class="lg:col-span-5 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-6">
-        <h2 class="text-lg font-semibold text-slate-900 border-b pb-3">Dose Parameters</h2>
-        
-        <!-- Unit Selection -->
-        <div>
-          <label class="block text-xs font-medium text-slate-500 mb-1">Concentration Unit</label>
-          <input type="text" id="unit" value="µM" oninput="updateCalculator()" class="w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none border-slate-300" />
+    <!-- Main Workspace -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Input Panel -->
+      <div class="lg:col-span-5 bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-7 shadow-xl space-y-6 flex flex-col justify-between">
+        <div class="space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <h2 class="text-base font-bold text-white uppercase tracking-wider text-xs">Dose Parameters</h2>
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-400">Unit:</span>
+              <input type="text" id="unit" value="µM" oninput="updateCalculator()" class="w-16 px-2.5 py-1 text-xs font-mono font-bold bg-slate-950 border border-slate-700 rounded-lg text-indigo-400 text-center focus:border-indigo-500 outline-none" />
+            </div>
+          </div>
+
+          <!-- Single Drug A -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-semibold text-slate-300">Drug A Solo IC₅₀ (D<sub>A</sub>)</span>
+              <span id="label_DA" class="font-mono font-bold text-indigo-400">100 µM</span>
+            </div>
+            <input type="number" id="DA" value="100" min="1" step="any" oninput="syncInput('DA')" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-950 border border-slate-800 rounded-xl text-white focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition" />
+          </div>
+
+          <!-- Single Drug B -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-semibold text-slate-300">Drug B Solo IC₅₀ (D<sub>B</sub>)</span>
+              <span id="label_DB" class="font-mono font-bold text-indigo-400">50 µM</span>
+            </div>
+            <input type="number" id="DB" value="50" min="1" step="any" oninput="syncInput('DB')" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-950 border border-slate-800 rounded-xl text-white focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition" />
+          </div>
+
+          <div class="pt-2 border-t border-slate-800/80"></div>
+
+          <!-- Combo Dose A -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-semibold text-slate-300">Combo Dose Drug A (d<sub>A</sub>)</span>
+              <span id="label_dA" class="font-mono font-bold text-emerald-400">30 µM</span>
+            </div>
+            <input type="number" id="dA" value="30" min="0" step="any" oninput="syncInput('dA')" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-950 border border-slate-800 rounded-xl text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 outline-none transition" />
+          </div>
+
+          <!-- Combo Dose B -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-semibold text-slate-300">Combo Dose Drug B (d<sub>B</sub>)</span>
+              <span id="label_dB" class="font-mono font-bold text-emerald-400">15 µM</span>
+            </div>
+            <input type="number" id="dB" value="15" min="0" step="any" oninput="syncInput('dB')" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-950 border border-slate-800 rounded-xl text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 outline-none transition" />
+          </div>
         </div>
 
-        <!-- Drug A Solo -->
-        <div class="space-y-2">
-          <div class="flex justify-between text-sm">
-            <span class="font-medium text-slate-700">Drug A Solo IC₅₀ / Equipotent Dose (D<sub>A</sub>)</span>
-            <span id="label_DA" class="font-semibold text-indigo-600">100 µM</span>
+        <!-- Real-time Combination Index Result Card -->
+        <div id="result-box" class="p-5 rounded-2xl border transition-all duration-300 mt-6 bg-slate-950 border-slate-800">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs uppercase tracking-wider font-bold text-slate-400">Combination Index</span>
+            <span id="ci-badge" class="px-3 py-1 text-xs font-bold rounded-full">Calculating</span>
           </div>
-          <input type="number" id="DA" value="100" min="1" step="1" oninput="syncInput('DA')" class="w-full px-3 py-2 text-sm border rounded-lg border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none" />
-        </div>
-
-        <!-- Drug B Solo -->
-        <div class="space-y-2">
-          <div class="flex justify-between text-sm">
-            <span class="font-medium text-slate-700">Drug B Solo IC₅₀ / Equipotent Dose (D<sub>B</sub>)</span>
-            <span id="label_DB" class="font-semibold text-indigo-600">50 µM</span>
+          <div class="flex items-baseline gap-2">
+            <span id="ci-value" class="text-4xl font-black font-mono tracking-tight text-white">0.600</span>
           </div>
-          <input type="number" id="DB" value="50" min="1" step="1" oninput="syncInput('DB')" class="w-full px-3 py-2 text-sm border rounded-lg border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none" />
-        </div>
-
-        <!-- Combo Dose A -->
-        <div class="space-y-2 pt-2 border-t">
-          <div class="flex justify-between text-sm">
-            <span class="font-medium text-slate-700">Combination Dose Drug A (d<sub>A</sub>)</span>
-            <span id="label_dA" class="font-semibold text-emerald-600">30 µM</span>
-          </div>
-          <input type="number" id="dA" value="30" min="0" step="1" oninput="syncInput('dA')" class="w-full px-3 py-2 text-sm border rounded-lg border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none" />
-        </div>
-
-        <!-- Combo Dose B -->
-        <div class="space-y-2">
-          <div class="flex justify-between text-sm">
-            <span class="font-medium text-slate-700">Combination Dose Drug B (d<sub>B</sub>)</span>
-            <span id="label_dB" class="font-semibold text-emerald-600">15 µM</span>
-          </div>
-          <input type="number" id="dB" value="15" min="0" step="1" oninput="syncInput('dB')" class="w-full px-3 py-2 text-sm border rounded-lg border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none" />
-        </div>
-
-        <!-- Result Box -->
-        <div class="p-4 rounded-xl border" id="result-box">
-          <div class="text-xs uppercase tracking-wider font-bold mb-1 text-slate-500">Combination Index (CI)</div>
-          <div class="flex items-baseline justify-between">
-            <span id="ci-value" class="text-3xl font-extrabold font-mono">0.600</span>
-            <span id="ci-badge" class="px-2.5 py-1 text-xs font-bold rounded-full">Synergy</span>
-          </div>
-          <div class="mt-3 text-xs text-slate-600 space-y-1">
+          <div class="mt-3 text-xs space-y-1 font-mono text-slate-400">
             <div id="fraction-breakdown">d<sub>A</sub>/D<sub>A</sub> + d<sub>B</sub>/D<sub>B</sub> = 0.300 + 0.300 = 0.600</div>
-            <div id="interpretation" class="font-medium text-emerald-700">Substantial Synergistic Interaction (CI &lt; 1)</div>
+            <div id="interpretation" class="font-sans font-semibold pt-1">Evaluating dose interaction...</div>
           </div>
         </div>
       </div>
 
-      <!-- Isobologram Visualization Panel -->
-      <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between">
+      <!-- Isobologram Visualization Display -->
+      <div class="lg:col-span-7 bg-slate-900/80 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 md:p-7 shadow-xl flex flex-col justify-between">
         <div>
-          <h2 class="text-lg font-semibold text-slate-900 mb-1">Isobologram Plot</h2>
-          <p class="text-xs text-slate-500 mb-4">The diagonal line marks the threshold of pure additivity (CI = 1).</p>
-          <div class="relative w-full h-80 md:h-96">
+          <div class="flex items-center justify-between mb-1">
+            <h2 class="text-base font-bold text-white">Cartesian Isobologram</h2>
+            <span class="text-xs font-mono text-slate-400">CI = 1.0 Additivity Reference</span>
+          </div>
+          <p class="text-xs text-slate-400 mb-6">Points plotted below the dashed boundary line indicate synergistic interaction.</p>
+          
+          <div class="relative w-full h-80 md:h-[400px]">
             <canvas id="isobologramChart"></canvas>
           </div>
         </div>
-        <div class="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
-          <div class="p-2 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200">
-            <div class="font-bold">CI &lt; 0.9</div>
-            <div>Synergism</div>
+
+        <!-- Legend / Threshold Cards -->
+        <div class="mt-6 grid grid-cols-3 gap-3 text-center text-xs font-mono">
+          <div class="p-3 rounded-2xl bg-emerald-950/30 border border-emerald-800/40 text-emerald-300">
+            <div class="font-bold text-sm">CI &lt; 0.9</div>
+            <div class="text-[11px] font-sans text-emerald-400/80 mt-0.5">Synergy</div>
           </div>
-          <div class="p-2 rounded-lg bg-blue-50 text-blue-800 border border-blue-200">
-            <div class="font-bold">0.9 ≤ CI ≤ 1.1</div>
-            <div>Additivity</div>
+          <div class="p-3 rounded-2xl bg-indigo-950/30 border border-indigo-800/40 text-indigo-300">
+            <div class="font-bold text-sm">0.9 ≤ CI ≤ 1.1</div>
+            <div class="text-[11px] font-sans text-indigo-400/80 mt-0.5">Additivity</div>
           </div>
-          <div class="p-2 rounded-lg bg-rose-50 text-rose-800 border border-rose-200">
-            <div class="font-bold">CI &gt; 1.1</div>
-            <div>Antagonism</div>
+          <div class="p-3 rounded-2xl bg-rose-950/30 border border-rose-800/40 text-rose-300">
+            <div class="font-bold text-sm">CI &gt; 1.1</div>
+            <div class="text-[11px] font-sans text-rose-400/80 mt-0.5">Antagonism</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Official Copyright & Attribution Footer -->
-    <footer class="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center text-xs text-slate-600 space-y-2">
-      <div class="font-semibold text-slate-800">
+    <!-- Footer -->
+    <footer class="mt-12 bg-slate-900/60 backdrop-blur-md rounded-2xl p-6 border border-slate-800/80 text-center text-xs text-slate-400 space-y-2">
+      <div class="font-semibold text-slate-200">
         Loewe Additivity Calculator &copy; 2026 Dr. Pon Nivedha Rajamanickam &amp; Dr. Jothi Nedunchezhian. All rights reserved.
       </div>
       <div>
-        Department of Biotechnology and Bioinformatics &bull; Holy Cross College (Autonomous), Trichirapalli
+        Department of Biotechnology and Bioinformatics &bull; Holy Cross College (Autonomous), Trichirappalli
       </div>
-      <div class="text-[11px] text-slate-400">
-        Theoretical reference model based on Loewe S. (1928) dose-additivity principles and isobolographic analysis.
+      <div class="text-[11px] text-slate-500">
+        Calculated via Loewe S. (1928) dose-additivity reference equation $\text{CI} = \frac{d_A}{D_A} + \frac{d_B}{D_B}$.
       </div>
     </footer>
   </div>
@@ -144,26 +204,27 @@
 
     function initChart() {
       const ctx = document.getElementById('isobologramChart').getContext('2d');
+      
       chart = new Chart(ctx, {
         type: 'scatter',
         data: {
           datasets: [
             {
-              label: 'Line of Additivity (CI = 1.0)',
+              label: 'Additivity Isobole (CI = 1.0)',
               data: [{ x: 0, y: 50 }, { x: 100, y: 0 }],
               showLine: true,
-              borderColor: '#3b82f6',
+              borderColor: '#818cf8',
               borderWidth: 2,
-              borderDash: [5, 5],
-              pointRadius: 4,
-              pointBackgroundColor: '#3b82f6',
+              borderDash: [6, 6],
+              pointRadius: 5,
+              pointBackgroundColor: '#818cf8',
               fill: false
             },
             {
-              label: 'Observed Combination Dose (dA, dB)',
+              label: 'Combination Dose Coordinate',
               data: [{ x: 30, y: 15 }],
-              pointRadius: 8,
-              pointHoverRadius: 10,
+              pointRadius: 9,
+              pointHoverRadius: 12,
               pointBackgroundColor: '#10b981',
               pointBorderColor: '#ffffff',
               pointBorderWidth: 2
@@ -177,17 +238,40 @@
             x: {
               type: 'linear',
               position: 'bottom',
-              title: { display: true, text: 'Drug A Dose (µM)', font: { weight: 'bold' } },
+              title: { 
+                display: true, 
+                text: 'Drug A Dose (µM)', 
+                color: '#94a3b8',
+                font: { family: 'Plus Jakarta Sans', weight: '600', size: 12 } 
+              },
+              grid: { color: 'rgba(51, 65, 85, 0.4)' },
+              ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } },
               min: 0
             },
             y: {
-              title: { display: true, text: 'Drug B Dose (µM)', font: { weight: 'bold' } },
+              title: { 
+                display: true, 
+                text: 'Drug B Dose (µM)', 
+                color: '#94a3b8',
+                font: { family: 'Plus Jakarta Sans', weight: '600', size: 12 } 
+              },
+              grid: { color: 'rgba(51, 65, 85, 0.4)' },
+              ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono' } },
               min: 0
             }
           },
           plugins: {
-            legend: { position: 'top' },
+            legend: { 
+              position: 'top',
+              labels: { color: '#cbd5e1', font: { family: 'Plus Jakarta Sans', size: 12, weight: '500' } }
+            },
             tooltip: {
+              backgroundColor: '#020617',
+              borderColor: '#334155',
+              borderWidth: 1,
+              padding: 12,
+              titleFont: { family: 'Plus Jakarta Sans', weight: 'bold' },
+              bodyFont: { family: 'JetBrains Mono' },
               callbacks: {
                 label: function(context) {
                   return `${context.dataset.label}: (${context.parsed.x}, ${context.parsed.y})`;
@@ -233,26 +317,26 @@
 
       let color = '#10b981';
       if (ci < 0.9) {
-        resBox.className = 'p-4 rounded-xl border bg-emerald-50 border-emerald-200 text-emerald-950';
-        ciBadge.className = 'px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-200 text-emerald-900';
+        resBox.className = 'p-5 rounded-2xl border transition-all duration-300 mt-6 bg-emerald-950/40 border-emerald-500/40 shadow-lg shadow-emerald-950/50';
+        ciBadge.className = 'px-3 py-1 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
         ciBadge.innerText = 'Synergy';
-        interp.innerText = 'Synergistic Interaction (Combination Index < 0.9)';
-        interp.className = 'font-medium text-emerald-800';
+        interp.innerText = 'Super-additive synergistic combination (CI < 0.9)';
+        interp.className = 'font-sans font-semibold pt-1 text-emerald-300';
         color = '#10b981';
       } else if (ci <= 1.1) {
-        resBox.className = 'p-4 rounded-xl border bg-blue-50 border-blue-200 text-blue-950';
-        ciBadge.className = 'px-2.5 py-1 text-xs font-bold rounded-full bg-blue-200 text-blue-900';
+        resBox.className = 'p-5 rounded-2xl border transition-all duration-300 mt-6 bg-indigo-950/40 border-indigo-500/40 shadow-lg shadow-indigo-950/50';
+        ciBadge.className = 'px-3 py-1 text-xs font-bold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30';
         ciBadge.innerText = 'Loewe Additivity';
-        interp.innerText = 'Additive Interaction (0.9 ≤ Combination Index ≤ 1.1)';
-        interp.className = 'font-medium text-blue-800';
-        color = '#3b82f6';
+        interp.innerText = 'Pure additive interaction (0.9 ≤ CI ≤ 1.1)';
+        interp.className = 'font-sans font-semibold pt-1 text-indigo-300';
+        color = '#818cf8';
       } else {
-        resBox.className = 'p-4 rounded-xl border bg-rose-50 border-rose-200 text-rose-950';
-        ciBadge.className = 'px-2.5 py-1 text-xs font-bold rounded-full bg-rose-200 text-rose-900';
+        resBox.className = 'p-5 rounded-2xl border transition-all duration-300 mt-6 bg-rose-950/40 border-rose-500/40 shadow-lg shadow-rose-950/50';
+        ciBadge.className = 'px-3 py-1 text-xs font-bold rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30';
         ciBadge.innerText = 'Antagonism';
-        interp.innerText = 'Antagonistic Interaction (Combination Index > 1.1)';
-        interp.className = 'font-medium text-rose-800';
-        color = '#ef4444';
+        interp.innerText = 'Sub-additive antagonistic interaction (CI > 1.1)';
+        interp.className = 'font-sans font-semibold pt-1 text-rose-300';
+        color = '#f43f5e';
       }
 
       if (chart) {
