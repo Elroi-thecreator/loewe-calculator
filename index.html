@@ -3,7 +3,99 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loewe Additivity Calculator | Holy Cross College</title>
+  <title>Loewe Additivity Calculator &amp; Isobologram Plotter | Free Synergy Tool</title>
+  <meta name="title" content="Loewe Additivity Calculator &amp; Isobologram Plotter | Free Synergy Tool" />
+  <meta name="description" content="Calculate Loewe Additivity Combination Index (CI) and generate real-time 2D isobolograms. Developed by Dr. Pon Nivedha Rajamanickam &amp; Dr. Jothi Nedunchezhian at Holy Cross College." />
+  <meta name="keywords" content="Loewe additivity calculator, isobologram plotter, drug synergy calculator, combination index CI, pharmacology synergy analysis, Bliss independence vs Loewe, Holy Cross College bioinformatics" />
+  <meta name="author" content="Dr. Pon Nivedha Rajamanickam, Dr. Jothi Nedunchezhian" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://loewe-calculator.onrender.com" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://loewe-calculator.onrender.com" />
+  <meta property="og:title" content="Loewe Additivity Calculator &amp; Isobologram Plotter" />
+  <meta property="og:description" content="Free scientific tool for calculating drug combination index (CI) and plotting Loewe isoboles for synergy, additivity, and antagonism." />
+  <meta property="og:image" content="https://loewe-calculator.onrender.com/og-image.png" />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://loewe-calculator.onrender.com" />
+  <meta property="twitter:title" content="Loewe Additivity Calculator &amp; Isobologram Plotter" />
+  <meta property="twitter:description" content="Calculate Loewe combination indices and generate Cartesian isobolograms directly in your browser." />
+  <meta property="twitter:image" content="https://loewe-calculator.onrender.com/og-image.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://loewe-calculator.onrender.com/#webapp",
+        "name": "Loewe Additivity & Isobologram Calculator",
+        "url": "https://loewe-calculator.onrender.com",
+        "applicationCategory": "EducationalApplication, HealthApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "description": "Scientific computing tool for calculating the Combination Index (CI) and plotting 2D Cartesian isobolograms based on the Loewe additivity reference model.",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Dr. Pon Nivedha Rajamanickam",
+            "affiliation": {
+              "@type": "EducationalOrganization",
+              "name": "Holy Cross College (Autonomous), Trichirappalli",
+              "department": "Department of Biotechnology and Bioinformatics"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Dr. Jothi Nedunchezhian",
+            "affiliation": {
+              "@type": "EducationalOrganization",
+              "name": "Holy Cross College (Autonomous), Trichirappalli",
+              "department": "Department of Biotechnology and Bioinformatics"
+            }
+          }
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://loewe-calculator.onrender.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Loewe Additivity?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Loewe additivity is a pharmacodynamic reference model used to assess drug-drug interactions. It assumes that a drug cannot synergize with itself (sham combination principle) and defines additivity as CI = (dA / DA) + (dB / DB) = 1."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How to interpret the Combination Index (CI)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Combination Index (CI) < 0.9 indicates synergism, 0.9 ≤ CI ≤ 1.1 indicates Loewe additivity, and CI > 1.1 indicates drug antagonism."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is an Isobologram?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An isobologram is a Cartesian plot connecting the standalone equipotent concentrations of two drugs (DA, 0) and (0, DB). Points below the line indicate synergy, while points above indicate antagonism."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -25,29 +117,26 @@
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
   
-  <!-- Background Glow Accents (Dark Mode Only) -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 hidden dark:block">
     <div class="absolute -top-40 left-1/4 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl"></div>
     <div class="absolute top-1/3 -right-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl"></div>
   </div>
 
-  <div class="relative z-10 max-w-6xl mx-auto px-4 py-6 md:py-10 flex-grow w-full space-y-6 md:space-y-8">
+  <div class="relative z-10 max-w-6xl mx-auto px-4 py-6 md:py-10 flex-grow w-full space-y-8">
     
-    <!-- Hero / Header Card -->
     <header class="bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm dark:shadow-2xl transition-colors duration-300">
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800/80">
         <div>
           <div class="flex items-center gap-3 mb-3">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/20">
               <span class="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-400 animate-pulse"></span>
-              Pharmacodynamics &amp; Synergy Suite
+              Academic Research &amp; Pharmacology Tool
             </span>
           </div>
-          <h1 class="text-2xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Loewe Additivity Calculator</h1>
-          <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base mt-1.5">Interactive dose-additivity modeling and real-time isobolographic analysis</p>
+          <h1 class="text-2xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Loewe Additivity Calculator &amp; Isobologram Plotter</h1>
+          <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base mt-1.5">Free online pharmacodynamic dose-addition analyzer &amp; combination index calculator</p>
         </div>
 
-        <!-- Controls: Presets & Theme Toggle -->
         <div class="flex flex-wrap items-center gap-2.5">
           <button onclick="loadPreset('synergy')" class="px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-slate-950 transition-all duration-200 shadow-sm">
             Synergy Preset
@@ -59,8 +148,7 @@
             Antagonism Preset
           </button>
 
-          <!-- Day/Night Mode Switch Button -->
-          <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 border border-slate-300 dark:border-slate-700 hover:scale-105 transition-all duration-200" title="Toggle Day/Night Mode">
+          <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 border border-slate-300 dark:border-slate-700 hover:scale-105 transition-all duration-200" title="Toggle Day/Night Mode" aria-label="Toggle Dark/Light Mode">
             <svg id="theme-icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
             </svg>
@@ -71,7 +159,6 @@
         </div>
       </div>
 
-      <!-- Institutional Metadata -->
       <div class="pt-5 grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
         <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-950/50 border border-slate-200/80 dark:border-slate-800/60">
           <span class="block text-slate-500 dark:text-slate-400 font-medium">Principal Developers</span>
@@ -83,38 +170,34 @@
         </div>
         <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-950/50 border border-slate-200/80 dark:border-slate-800/60">
           <span class="block text-slate-500 dark:text-slate-400 font-medium">Institution</span>
-          <span class="font-semibold text-slate-800 dark:text-slate-200 text-sm mt-0.5 block">Holy Cross College (Autonomous), Trichy</span>
+          <span class="font-semibold text-slate-800 dark:text-slate-200 text-sm mt-0.5 block">Holy Cross College (Autonomous), Trichirappalli</span>
         </div>
       </div>
     </header>
 
-    <!-- Main Workspace -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
       
-      <!-- Input Panel -->
-      <div class="lg:col-span-5 bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-7 shadow-sm dark:shadow-xl space-y-6 flex flex-col justify-between transition-colors duration-300">
+      <section class="lg:col-span-5 bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-7 shadow-sm dark:shadow-xl space-y-6 flex flex-col justify-between transition-colors duration-300">
         <div class="space-y-4 md:space-y-5">
           <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
             <h2 class="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs">Dose Parameters</h2>
             <div class="flex items-center gap-2">
-              <span class="text-xs text-slate-500 dark:text-slate-400">Unit:</span>
+              <label for="unit" class="text-xs text-slate-500 dark:text-slate-400">Unit:</label>
               <input type="text" id="unit" value="µM" oninput="updateCalculator()" class="w-16 px-2.5 py-1 text-xs font-mono font-bold bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-indigo-600 dark:text-indigo-400 text-center focus:border-indigo-500 outline-none" />
             </div>
           </div>
 
-          <!-- Single Drug A -->
           <div class="space-y-1.5">
             <div class="flex justify-between items-center text-xs">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Drug A Solo IC₅₀ (D<sub>A</sub>)</span>
+              <label for="DA" class="font-semibold text-slate-700 dark:text-slate-300">Drug A Solo IC₅₀ / Dose (D<sub>A</sub>)</label>
               <span id="label_DA" class="font-mono font-bold text-indigo-600 dark:text-indigo-400">100 µM</span>
             </div>
             <input type="number" id="DA" value="100" min="1" step="any" oninput="syncInput('DA')" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition" />
           </div>
 
-          <!-- Single Drug B -->
           <div class="space-y-1.5">
             <div class="flex justify-between items-center text-xs">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Drug B Solo IC₅₀ (D<sub>B</sub>)</span>
+              <label for="DB" class="font-semibold text-slate-700 dark:text-slate-300">Drug B Solo IC₅₀ / Dose (D<sub>B</sub>)</label>
               <span id="label_DB" class="font-mono font-bold text-indigo-600 dark:text-indigo-400">50 µM</span>
             </div>
             <input type="number" id="DB" value="50" min="1" step="any" oninput="syncInput('DB')" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition" />
@@ -122,29 +205,26 @@
 
           <div class="pt-2 border-t border-slate-100 dark:border-slate-800/80"></div>
 
-          <!-- Combo Dose A -->
           <div class="space-y-1.5">
             <div class="flex justify-between items-center text-xs">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Combo Dose Drug A (d<sub>A</sub>)</span>
+              <label for="dA" class="font-semibold text-slate-700 dark:text-slate-300">Combo Dose Drug A (d<sub>A</sub>)</label>
               <span id="label_dA" class="font-mono font-bold text-emerald-600 dark:text-emerald-400">30 µM</span>
             </div>
             <input type="number" id="dA" value="30" min="0" step="any" oninput="syncInput('dA')" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 outline-none transition" />
           </div>
 
-          <!-- Combo Dose B -->
           <div class="space-y-1.5">
             <div class="flex justify-between items-center text-xs">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">Combo Dose Drug B (d<sub>B</sub>)</span>
+              <label for="dB" class="font-semibold text-slate-700 dark:text-slate-300">Combo Dose Drug B (d<sub>B</sub>)</label>
               <span id="label_dB" class="font-mono font-bold text-emerald-600 dark:text-emerald-400">15 µM</span>
             </div>
             <input type="number" id="dB" value="15" min="0" step="any" oninput="syncInput('dB')" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 outline-none transition" />
           </div>
         </div>
 
-        <!-- Real-time Combination Index Result Card -->
         <div id="result-box" class="p-5 rounded-2xl border transition-all duration-300 mt-6 bg-slate-100 dark:bg-slate-950 border-slate-200 dark:border-slate-800">
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400">Combination Index</span>
+            <span class="text-xs uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400">Combination Index (CI)</span>
             <span id="ci-badge" class="px-3 py-1 text-xs font-bold rounded-full">Calculating</span>
           </div>
           <div class="flex items-baseline gap-2">
@@ -155,23 +235,21 @@
             <div id="interpretation" class="font-sans font-semibold pt-1">Evaluating dose interaction...</div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Isobologram Visualization Display -->
-      <div class="lg:col-span-7 bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-7 shadow-sm dark:shadow-xl flex flex-col justify-between transition-colors duration-300">
+      <section class="lg:col-span-7 bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-7 shadow-sm dark:shadow-xl flex flex-col justify-between transition-colors duration-300">
         <div>
           <div class="flex items-center justify-between mb-1">
-            <h2 class="text-base font-bold text-slate-900 dark:text-white">Cartesian Isobologram</h2>
+            <h2 class="text-base font-bold text-slate-900 dark:text-white">Cartesian Isobologram Plot</h2>
             <span class="text-xs font-mono text-slate-500 dark:text-slate-400">CI = 1.0 Additivity Line</span>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 md:mb-6">Data points falling below the reference isobole represent synergistic interactions.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 md:mb-6">Data points falling below the reference isobole represent synergistic drug combinations.</p>
           
           <div class="relative w-full h-80 md:h-[390px]">
-            <canvas id="isobologramChart"></canvas>
+            <canvas id="isobologramChart" aria-label="Interactive Isobologram Plot" role="img"></canvas>
           </div>
         </div>
 
-        <!-- Legend / Threshold Cards -->
         <div class="mt-6 grid grid-cols-3 gap-2.5 md:gap-3 text-center text-xs font-mono">
           <div class="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300">
             <div class="font-bold text-sm">CI &lt; 0.9</div>
@@ -186,10 +264,50 @@
             <div class="text-[11px] font-sans text-rose-700/80 dark:text-rose-400/80 mt-0.5">Antagonism</div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <!-- Footer -->
+    <article class="bg-white dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm dark:shadow-xl space-y-6 text-sm text-slate-600 dark:text-slate-300 transition-colors duration-300">
+      <div class="border-b border-slate-100 dark:border-slate-800 pb-4">
+        <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Understanding Loewe Additivity &amp; Isobologram Analysis</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm mt-1">A reference framework for pharmacodynamic synergy and combination therapy evaluation</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 dark:text-white text-base">The Mathematical Equation</h3>
+          <p>The <strong>Loewe Additivity Model</strong> (introduced by Sigmund Loewe) assesses whether two agents act synergistically, additively, or antagonistically based on the <em>sham combination principle</em>. The Combination Index (CI) is computed as:</p>
+          <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-950 font-mono text-center text-sm font-bold text-indigo-600 dark:text-indigo-400 border border-slate-200 dark:border-slate-800">
+            CI = (d<sub>A</sub> / D<sub>A</sub>) + (d<sub>B</sub> / D<sub>B</sub>)
+          </div>
+          <ul class="list-disc list-inside space-y-1 text-xs">
+            <li><strong>d<sub>A</sub>, d<sub>B</sub>:</strong> Concentration of Drug A and Drug B in the combination.</li>
+            <li><strong>D<sub>A</sub>, D<sub>B</sub>:</strong> Equipotent concentration of Drug A and Drug B alone producing the same biological effect (e.g., IC₅₀ or EC₅₀).</li>
+          </ul>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="font-bold text-slate-900 dark:text-white text-base">Loewe Additivity vs. Bliss Independence</h3>
+          <p>While <strong>Bliss Independence</strong> assumes drugs act through completely independent biological mechanisms, <strong>Loewe Additivity</strong> is the gold standard when compounds act on the same pathway or shared biological targets.</p>
+          <p>An <strong>Isobologram</strong> provides a visual verification: the diagonal line connects standalone doses $(D_A, 0)$ and $(0, D_B)$. Synergy coordinates fall strictly below the line.</p>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-slate-100 dark:border-slate-800 space-y-4">
+        <h3 class="font-bold text-slate-900 dark:text-white text-base">Frequently Asked Questions (FAQs)</h3>
+        <div class="space-y-3 text-xs md:text-sm">
+          <details class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
+            <summary class="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">How do I interpret my Combination Index (CI) score?</summary>
+            <p class="mt-2 text-slate-600 dark:text-slate-400">CI &lt; 0.9 denotes synergism (the drugs enhance each other's potency), 0.9 ≤ CI ≤ 1.1 denotes simple Loewe dose addition, and CI &gt; 1.1 indicates antagonism (the drugs interfere with one another).</p>
+          </details>
+          <details class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
+            <summary class="font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Can this tool be used for cancer cell viability and antimicrobial checkerboard assays?</summary>
+            <p class="mt-2 text-slate-600 dark:text-slate-400">Yes. You can input IC₅₀, MIC (Minimum Inhibitory Concentration), or any predefined iso-effective concentration from in vitro or in vivo experiments.</p>
+          </details>
+        </div>
+      </div>
+    </article>
+
     <footer class="mt-8 bg-white dark:bg-slate-900/60 backdrop-blur-md rounded-2xl p-6 border border-slate-200 dark:border-slate-800/80 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2 transition-colors duration-300">
       <div class="font-semibold text-slate-800 dark:text-slate-200">
         Loewe Additivity Calculator &copy; 2026 Dr. Pon Nivedha Rajamanickam &amp; Dr. Jothi Nedunchezhian. All rights reserved.
@@ -198,7 +316,7 @@
         Department of Biotechnology and Bioinformatics &bull; Holy Cross College (Autonomous), Trichirappalli
       </div>
       <div class="text-[11px] text-slate-400 dark:text-slate-500">
-        Calculated via Loewe S. (1928) dose-additivity reference equation CI = (d_A / D_A) + (d_B / D_B).
+        Published research computational utility for pharmacodynamics and drug synergy analysis.
       </div>
     </footer>
   </div>
