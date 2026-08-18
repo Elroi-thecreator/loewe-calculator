@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loewe Additivity Calculator &amp; Isobologram Plotter | Free Synergy Tool</title>
   <meta name="title" content="Loewe Additivity Calculator &amp; Isobologram Plotter | Free Synergy Tool" />
-  <meta name="description" content="Calculate Loewe Additivity Combination Index (CI), process Excel checkerboards, and plot interactive 2D isobolograms. Developed by Dr. Pon Nivedha Rajamanickam &amp; Dr. Jothi Nedunchezhian at Holy Cross College." />
+  <meta name="description" content="Calculate Loewe Additivity Combination Index (CI), process Excel checkerboards, and plot interactive 2D isobolograms. Developed and maintained by Dr. Pon Nivedha Rajamanickam, Dr. Jothi Nedunchezhian &amp; Dr. Radha Arulkumar at Holy Cross College." />
   <meta name="keywords" content="Loewe additivity calculator, isobologram plotter, drug synergy calculator, combination index CI, pharmacology synergy analysis, Holy Cross College bioinformatics" />
-  <meta name="author" content="Dr. Pon Nivedha Rajamanickam, Dr. Jothi Nedunchezhian" />
+  <meta name="author" content="Dr. Pon Nivedha Rajamanickam, Dr. Jothi Nedunchezhian, Dr. Radha Arulkumar" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://loewe-calc.onrender.com" />
 
@@ -34,6 +34,15 @@
       {
         "@type": "Person",
         "name": "Dr. Jothi Nedunchezhian",
+        "affiliation": {
+          "@type": "EducationalOrganization",
+          "name": "Holy Cross College (Autonomous), Trichirappalli",
+          "department": "Department of Biotechnology and Bioinformatics"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Dr. Radha Arulkumar",
         "affiliation": {
           "@type": "EducationalOrganization",
           "name": "Holy Cross College (Autonomous), Trichirappalli",
@@ -129,8 +138,8 @@
 
       <div class="pt-5 grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
         <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-950/50 border border-slate-200/80 dark:border-slate-800/60">
-          <span class="block text-slate-500 dark:text-slate-400 font-medium">Principal Developers</span>
-          <span class="font-semibold text-slate-800 dark:text-slate-200 text-sm mt-0.5 block">Dr. Pon Nivedha Rajamanickam &amp; Dr. Jothi Nedunchezhian</span>
+          <span class="block text-slate-500 dark:text-slate-400 font-medium">Principal Developers &amp; Maintainers</span>
+          <span class="font-semibold text-slate-800 dark:text-slate-200 text-sm mt-0.5 block">Dr. Pon Nivedha Rajamanickam, Dr. Jothi Nedunchezhian &amp; Dr. Radha Arulkumar</span>
         </div>
         <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-950/50 border border-slate-200/80 dark:border-slate-800/60">
           <span class="block text-slate-500 dark:text-slate-400 font-medium">Academic Department</span>
@@ -221,7 +230,7 @@
                 <label for="dA" class="font-semibold text-slate-700 dark:text-slate-300">Combo Dose Drug A (d<sub>A</sub>)</label>
                 <span id="label_dA" class="font-mono font-bold text-emerald-600 dark:text-emerald-400">30 µM</span>
               </div>
-              <input type="number" id="dA" value="30" min="0" step="any" oninput="updateCalculator()" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 outline-none transition" />
+              <input type="number" id="dA" value="30" min="0" step="any" oninput="updateCalculator()" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-indigo-500 outline-none transition" />
             </div>
 
             <div class="space-y-1.5">
@@ -229,7 +238,7 @@
                 <label for="dB" class="font-semibold text-slate-700 dark:text-slate-300">Combo Dose Drug B (d<sub>B</sub>)</label>
                 <span id="label_dB" class="font-mono font-bold text-emerald-600 dark:text-emerald-400">15 µM</span>
               </div>
-              <input type="number" id="dB" value="15" min="0" step="any" oninput="updateCalculator()" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 outline-none transition" />
+              <input type="number" id="dB" value="15" min="0" step="any" oninput="updateCalculator()" class="w-full px-4 py-2.5 text-sm font-mono bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500/50 focus:border-indigo-500 outline-none transition" />
             </div>
           </div>
         </div>
@@ -371,7 +380,7 @@
 
     <footer class="mt-8 bg-white dark:bg-slate-900/60 backdrop-blur-md rounded-2xl p-6 border border-slate-200 dark:border-slate-800/80 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2 transition-colors duration-300">
       <div class="font-semibold text-slate-800 dark:text-slate-200">
-        Loewe Additivity Calculator &copy; 2026 Dr. Pon Nivedha Rajamanickam &amp; Dr. Jothi Nedunchezhian. All rights reserved.
+        Loewe Additivity Calculator &copy; 2026 Dr. Pon Nivedha Rajamanickam, Dr. Jothi Nedunchezhian &amp; Dr. Radha Arulkumar. All rights reserved.
       </div>
       <div>
         Department of Biotechnology and Bioinformatics &bull; Holy Cross College (Autonomous), Trichirappalli
